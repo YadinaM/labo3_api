@@ -1,6 +1,7 @@
 export default class Weather{
     constructor(){
         this.getLocation();
+        this.getAnimal();
     }
 
     getLocation(){
@@ -11,7 +12,6 @@ export default class Weather{
         this.la = result.coords.latitude;
         this.lo = result.coords.longitude;
         this.getWeather();
-        //console.log(this.la);
     }
 
     getWeather(){
@@ -23,6 +23,23 @@ export default class Weather{
         }).catch(error => {
             console.log(error);
         })
+    }
+
+    getAnimal() {
+        let url2 = `https://randomfox.ca/floof/`;
+        fetch(url2)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                const imageUrl = data.image;
+                const imgElement = document.createElement("img");
+                imgElement.src = imageUrl;
+                document.querySelector("#weather").appendChild(imgElement);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     error(){
