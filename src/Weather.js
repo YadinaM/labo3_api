@@ -19,7 +19,17 @@ export default class Weather{
         fetch(url).then(response => {
             return response.json();
         }).then(data => {
-            document.querySelector("#weather").innerHTML = data.current_weather.temperature;
+            const temperature = data.current_weather.temperature;
+            
+            const h2Sentence = document.createElement("h1");
+            h2Sentence.textContent = "It is currently";
+            
+            const h2Temperature = document.createElement("h1");
+            h2Temperature.textContent = `${temperature}°C`;
+            
+            const weatherContainer = document.querySelector("#weather");
+            weatherContainer.appendChild(h2Sentence);
+            weatherContainer.appendChild(h2Temperature);      
         }).catch(error => {
             console.log(error);
         })
@@ -35,12 +45,20 @@ export default class Weather{
                 const imageUrl = data.image;
                 const imgElement = document.createElement("img");
                 imgElement.src = imageUrl;
+                imgElement.style.width = "320px";
+
                 document.querySelector("#weather").appendChild(imgElement);
+
+                const pElement = document.createElement("p");
+                pElement.textContent = "the perfect temperature to watch our new foxes";
+    
+                const weatherContainer = document.querySelector("#weather");
+                weatherContainer.appendChild(pElement);
             })
             .catch(error => {
                 console.log(error);
             });
-    }
+     }
 
     error(){
         console.log(error);
